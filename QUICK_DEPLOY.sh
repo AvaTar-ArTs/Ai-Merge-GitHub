@@ -48,16 +48,19 @@ case $choice in
         echo ""
         read -p "Paste your new token here: " TOKEN
         
-        # Save to env file
-        mkdir -p ~/.env.d
-        cat > ~/.env.d/github-avatararts.env << EOF
-# GitHub Personal Access Token for AvaTar-ArTs (me@avatararts.org)
-# Created: $(date +%Y-%m-%d)
-# Scopes: repo, workflow
-GITHUB_TOKEN_AVATARARTS=$TOKEN
-EOF
-        
-        echo "${GREEN}✅ Token saved to ~/.env.d/github-avatararts.env${NC}"
+        # Add to consolidated github.env (if not already there)
+        if ! grep -q "GITHUB_TOKEN_AVATARARTS=" ~/.env.d/github.env 2>/dev/null; then
+            echo "" >> ~/.env.d/github.env
+            echo "# AvaTar-ArTs token added: $(date +%Y-%m-%d)" >> ~/.env.d/github.env
+            echo "GITHUB_TOKEN_AVATARARTS=$TOKEN" >> ~/.env.d/github.env
+            echo "GITHUB_PERSONAL_ACCESS_TOKEN_AVATARARTS=$TOKEN" >> ~/.env.d/github.env
+            echo "${GREEN}✅ Token added to ~/.env.d/github.env${NC}"
+        else
+            # Update existing token
+            sed -i.bak "s|GITHUB_TOKEN_AVATARARTS=.*|GITHUB_TOKEN_AVATARARTS=$TOKEN|" ~/.env.d/github.env
+            sed -i.bak "s|GITHUB_PERSONAL_ACCESS_TOKEN_AVATARARTS=.*|GITHUB_PERSONAL_ACCESS_TOKEN_AVATARARTS=$TOKEN|" ~/.env.d/github.env
+            echo "${GREEN}✅ Token updated in ~/.env.d/github.env${NC}"
+        fi
         ;;
         
     2)
@@ -68,7 +71,9 @@ EOF
     3)
         echo ""
         echo "${YELLOW}Switching to ichoake account${NC}"
-        TOKEN=$(grep "GITHUB_TOKEN_ICHOAKE=" ~/.env.d/github-ichoake.env | cut -d'=' -f2)
+        # Load from consolidated github.env
+        source ~/.env.d/github.env
+        TOKEN=$GITHUB_TOKEN_ICHOAKE
         
         # Update remote URL
         git remote set-url origin https://github.com/ichoake/Ai-Merge-GitHub.git
@@ -82,7 +87,9 @@ EOF
     4)
         echo ""
         echo "${YELLOW}Switching to GPTJunkie account${NC}"
-        TOKEN=$(grep "^GITHUB_TOKEN=" ~/.env.d/github.env | head -1 | cut -d'=' -f2)
+        # Load from consolidated github.env
+        source ~/.env.d/github.env
+        TOKEN=$GITHUB_TOKEN_GPTJUNKIE
         
         # Update remote URL
         git remote set-url origin https://github.com/GPTJunkie/Ai-Merge-GitHub.git
