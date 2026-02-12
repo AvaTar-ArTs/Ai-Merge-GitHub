@@ -3,34 +3,57 @@
 ## Overview
 The AI Merge System is a revolutionary collaborative intelligence platform that creates a collaborative environment where multiple AI inputs are intelligently synthesized into cohesive, high-quality outputs that amplify human creativity and AI capabilities.
 
-## Core Philosophy
-Unlike traditional AI systems that work in isolation, AI Merge creates a collaborative environment where multiple AI inputs are intelligently synthesized into cohesive, high-quality outputs.
+## Features
+- **Multi-Modal Support**: Handles text, images, audio, and video inputs
+- **Collaborative Intelligence**: Multiple AIs contribute perspectives that are intelligently synthesized
+- **Quality Assurance**: Built-in validation and confidence scoring
+- **Strategic Merging**: Multiple approaches to combining AI inputs
+- **Auto-Setup**: Interactive configuration system for AI positions
 
-## Key Concepts
-- **Intelligent Synthesis**: Combines inputs from multiple AIs into coherent solutions
-- **Collaborative Amplification**: Enhances human-AI collaboration through structured workflows
-- **Quality Assurance**: Built-in validation and verification mechanisms
-- **Adaptive Learning**: System improves based on outcomes and feedback
-
-## Architecture
-```
-┌─────────────────┐    ┌──────────────────┐    ┌─────────────────┐
-│   Human Input   │───▶│  AI Merge Core   │───▶│  Synthesized   │
-│                 │    │                  │    │  Output       │
-│ • Requirements  │    │ • Multi-AI       │    │ • Integrated  │
-│ • Constraints   │    │   Coordination   │    │   Solution    │
-│ • Context       │    │ • Intelligent    │    │ • Validated   │
-└─────────────────┘    │   Synthesis      │    │   Results     │
-                       │ • Quality        │    └─────────────────┘
-                       │   Assurance      │
-                       └──────────────────┘
-                              │
-                              ▼
-                       ┌──────────────────┐
-                       │  Learning &    │
-                       │  Optimization  │
-                       └──────────────────┘
+## Installation
+```bash
+git clone https://github.com/AvaTar-ArTs/Ai-Merge-GitHub.git
+cd Ai-Merge-GitHub
 ```
 
-## Unique Value Proposition
-AI Merge doesn't just use AIs as tools—it creates a collaborative intelligence environment where human creativity and AI capabilities are amplified together, resulting in superior outcomes compared to traditional approaches.
+## Usage
+```python
+from ai_merge_system import AIMergeSystem, AIAgent, MergeStrategy
+
+# Initialize the system
+ai_merge = AIMergeSystem()
+
+# Register an agent
+agent = AIAgent(
+    id="claude-001",
+    name="Claude",
+    capabilities=["analysis", "reasoning"],
+    confidence=0.9,
+    specialty="complex reasoning",
+    response_time_ms=1200
+)
+ai_merge.register_agent(agent)
+
+# Submit a contribution
+ai_merge.submit_contribution("claude-001", "This is my contribution...")
+
+# Merge contributions
+result = ai_merge.merge_all_contributions(MergeStrategy.SYNTHESIS, "Context for merging")
+print(f"Merged content: {result.merged_content}")
+print(f"Confidence: {result.confidence_score}")
+```
+
+## Documentation
+- [API Documentation](API.md)
+- [Getting Started Guide](GETTING_STARTED.md)
+- [Innovation Framework](INNOVATION_FRAMEWORK.md)
+- [Multi-Modal Extension](MULTI_MODAL_EXTENSION.md)
+
+## Auto-Setup
+Run the auto-setup to configure AI positions interactively:
+```bash
+python setup.py
+```
+
+## License
+MIT License - see the [LICENSE](LICENSE) file for details.
